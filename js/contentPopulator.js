@@ -39,7 +39,6 @@ function populateTimeline() {
             <div class="timeline-card">
                 <div class="timeline-card-image">${imageContent}</div>
                 <div class="timeline-card-content">
-                    <div class="timeline-card-date">${item.date}</div>
                     <div class="timeline-card-caption">${item.caption}</div>
                 </div>
             </div>
