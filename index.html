@@ -169,10 +169,29 @@
         /* Elegant Timeline - Mobile First */
         .timeline-container {
             width: 100%;
-            max-width: 100vw;
-            overflow: hidden;
             position: relative;
             padding: 1rem 0;
+        }
+
+        .timeline-container::before,
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .timeline-container::before {
+            left: 0;
+            background: linear-gradient(to right, #090a0f, transparent);
+        }
+
+        .timeline-container::after {
+            right: 0;
+            background: linear-gradient(to left, #090a0f, transparent);
         }
 
         .timeline-scroll {
@@ -180,7 +199,9 @@
             gap: 1.2rem;
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 1.5rem 2rem;
+            padding: 1.5rem;
+            padding-left: calc(50% - 140px);
+            padding-right: calc(50% - 140px);
             margin: 0 auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
@@ -368,8 +389,15 @@
             }
             
             .timeline-scroll {
-                padding: 1rem 1.5rem;
+                padding: 1rem;
+                padding-left: calc(50% - 130px);
+                padding-right: calc(50% - 130px);
                 gap: 1rem;
+            }
+            
+            .timeline-container::before,
+            .timeline-container::after {
+                width: 40px;
             }
             
             .scroll-indicator {
@@ -390,6 +418,17 @@
             
             .timeline-card-content {
                 padding: 1rem;
+            }
+            
+            .timeline-scroll {
+                padding: 1rem;
+                padding-left: calc(50% - 120px);
+                padding-right: calc(50% - 120px);
+            }
+            
+            .timeline-container::before,
+            .timeline-container::after {
+                width: 30px;
             }
         }
     </style>
