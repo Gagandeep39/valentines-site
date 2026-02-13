@@ -82,6 +82,45 @@
             color: #ffb3ba;
         }
 
+        /* Elegant animations for first slide */
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        .fade-in-up-delay-1 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.4s forwards;
+        }
+
+        .fade-in-up-delay-2 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.8s forwards;
+        }
+
+        .fade-in-up-delay-3 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 1.2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .special-name {
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: #ffb3ba;
+        }
+
         .slide p {
             font-size: 1.2rem;
             font-weight: 300;
@@ -184,10 +223,10 @@
 
     <div class="slides-container">
         <div class="slide active">
-            <h1>Happy Valentine's Day</h1>
-            <div class="heart">❤️</div>
-            <h1>Jason</h1>
-            <p>From Gagan</p>
+            <p class="fade-in-up" style="font-size: 1.4rem; margin-bottom: 3rem;">Happy Valentine's Day...</p>
+            <p class="fade-in-up-delay-1" style="font-size: 1.3rem; opacity: 0.8; margin-bottom: 2rem;">To the most special person</p>
+            <h1 class="special-name fade-in-up-delay-2">Jason</h1>
+            <div class="heart fade-in-up-delay-3">❤️</div>
         </div>
 
         <div class="slide">
