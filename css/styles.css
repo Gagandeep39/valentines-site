@@ -357,7 +357,7 @@ body {
 .timeline-container {
     width: 100%;
     position: relative;
-    padding: 1rem 0;
+    padding: 2rem 0;
 }
 
 .timeline-container::before,
@@ -385,8 +385,8 @@ body {
     display: flex;
     gap: 1.2rem;
     overflow-x: auto;
-    overflow-y: hidden;
-    padding: 1.5rem;
+    overflow-y: visible;
+    padding: 2.5rem 1.5rem;
     padding-left: calc(50% - 140px);
     padding-right: calc(50% - 140px);
     margin: 0 auto;
@@ -653,7 +653,7 @@ body {
     }
     
     .timeline-scroll {
-        padding: 1rem;
+        padding: 2.5rem 1rem;
         padding-left: calc(50% - 130px);
         padding-right: calc(50% - 130px);
         gap: 1rem;
@@ -685,7 +685,7 @@ body {
     }
     
     .timeline-scroll {
-        padding: 1rem;
+        padding: 2.5rem 1rem;
         padding-left: calc(50% - 120px);
         padding-right: calc(50% - 120px);
     }

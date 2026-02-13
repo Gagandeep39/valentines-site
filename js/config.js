@@ -21,18 +21,18 @@ const CONFIG = {
     
     // Timeline/Gallery images (past year memories)
     timelineImages: [
-        { src: "", caption: "January 2025", date: "Jan" },
-        { src: "", caption: "February 2025", date: "Feb" },
-        { src: "", caption: "March 2025", date: "Mar" },
-        { src: "", caption: "April 2025", date: "Apr" },
-        { src: "", caption: "May 2025", date: "May" },
-        { src: "", caption: "June 2025", date: "Jun" },
-        { src: "", caption: "July 2025", date: "Jul" },
-        { src: "", caption: "August 2025", date: "Aug" },
-        { src: "", caption: "September 2025", date: "Sep" },
-        { src: "", caption: "October 2025", date: "Oct" },
-        { src: "", caption: "November 2025", date: "Nov" },
-        { src: "", caption: "December 2025", date: "Dec" }
+        { src: "https://iili.io/qH8UufI.jpg", caption: "January", date: "Jan" },
+        { src: "https://iili.io/qH8UIiN.jpg", caption: "February", date: "Feb" },
+        { src: "https://iili.io/qH8UKUF.jpg", caption: "March", date: "Mar" },
+        { src: "https://iili.io/qH8ehEF.jpg", caption: "April", date: "Apr" },
+        { src: "https://iili.io/qH8UCOJ.jpg", caption: "May", date: "May" },
+        { src: "https://iili.io/qH8UBRa.jpg", caption: "June", date: "Jun" },
+        { src: "https://iili.io/qH8UAlt.jpg", caption: "July", date: "Jul" },
+        { src: "https://iili.io/qH8UzVp.jpg", caption: "August", date: "Aug" },
+        { src: "https://iili.io/qH8UnDv.jpg", caption: "September", date: "Sep" },
+        { src: "https://iili.io/qH8UxxR.jpg", caption: "October", date: "Oct" },
+        { src: "https://iili.io/qH8UqHg.jpg", caption: "November", date: "Nov" },
+        { src: "https://iili.io/qH8U7Jn.gif", caption: "December", date: "Dec" }
     ],
     
     // Final message
