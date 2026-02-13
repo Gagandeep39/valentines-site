@@ -626,7 +626,8 @@
             currentSlide = (currentSlide + 1) % totalSlides;
             slides[currentSlide].classList.add('active');
 
-            nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Restart' : 'Next';
+            // Hide button on scratch card page, show on others
+            nextBtn.style.display = currentSlide === 4 ? 'none' : 'block';
 
             if (currentSlide === 4 && !window.scratchInitialized) {
                 setTimeout(initScratchCard, 100);
