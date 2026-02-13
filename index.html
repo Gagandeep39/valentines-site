@@ -166,6 +166,122 @@
             color: #ff6b7a;
         }
 
+        /* Elegant Timeline - Mobile First */
+        .timeline-container {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline-scroll {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1.5rem 2rem;
+            margin: 0 auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        .timeline-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .timeline-card {
+            flex: 0 0 280px;
+            height: 360px;
+            scroll-snap-align: center;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 179, 186, 0.08), rgba(138, 43, 226, 0.08));
+            border: 1px solid rgba(255, 179, 186, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(255, 179, 186, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 179, 186, 0.35);
+            border-color: rgba(255, 179, 186, 0.5);
+        }
+
+        .timeline-card-image {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, rgba(255, 179, 186, 0.2), rgba(138, 43, 226, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                left: 100%;
+            }
+        }
+
+        .timeline-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .timeline-card-content {
+            padding: 1.2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-card-date {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffb3ba;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .timeline-card-caption {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            margin-top: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
         .love-list {
             margin-top: 2rem;
         }
@@ -238,6 +354,43 @@
             .heart { font-size: 3rem; }
             .timeline { font-size: 1rem; gap: 1rem; }
             .nav-btn { bottom: 1.5rem; right: 1.5rem; }
+            .days-number { font-size: 5rem; }
+            .days-text { font-size: 2rem; }
+            
+            .timeline-card {
+                flex: 0 0 260px;
+                height: 340px;
+            }
+            
+            .timeline-card-image {
+                height: 240px;
+                font-size: 3.5rem;
+            }
+            
+            .timeline-scroll {
+                padding: 1rem 1.5rem;
+                gap: 1rem;
+            }
+            
+            .scroll-indicator {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-card {
+                flex: 0 0 240px;
+                height: 320px;
+            }
+            
+            .timeline-card-image {
+                height: 220px;
+                font-size: 3rem;
+            }
+            
+            .timeline-card-content {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -259,10 +412,20 @@
         </div>
 
         <div class="slide">
-            <h2>Our Story</h2>
-            <p>Lorem ipsum dolor sit amet</p>
-            <p>consectetur adipiscing elit</p>
-            <p>Every moment has been magical</p>
+            <h2 id="miracleTitle">A Miracle in the Making</h2>
+            <p id="miracleText" style="max-width: 700px; line-height: 1.9; margin-bottom: 1.5rem;">Consider this: the odds of you being born have been estimated at a mind-boggling 1 in 10<sup>2,685,000,000</sup>. And the chances of life emerging on Earth? Equally astronomical.</p>
+            <p id="miracleConclusion" style="max-width: 700px; line-height: 1.9; font-weight: 400;">Yet, against all odds, we not only exist – we found each other. Meeting you is nothing short of a cosmic miracle.</p>
+        </div>
+
+        <div class="slide" style="overflow: hidden;">
+            <h2 style="margin-bottom: 0.5rem;">Our Story in Moments</h2>
+            <p style="opacity: 0.7; margin-bottom: 0.5rem; font-size: 1rem;">Swipe to explore our memories</p>
+            <div class="timeline-container">
+                <div class="timeline-scroll" id="timelineScroll">
+                    <!-- Timeline will be populated here -->
+                </div>
+            </div>
+            <div class="scroll-indicator">← Swipe →</div>
         </div>
 
         <div class="slide">
@@ -312,11 +475,25 @@
             dateMet: "Feb 14, 2024",
             currentDate: "Feb 14, 2026",
             
-            // Story (can be multiple lines)
-            story: [
-                "Lorem ipsum dolor sit amet",
-                "consectetur adipiscing elit",
-                "Every moment has been magical"
+            // Miracle message
+            miracleTitle: "A Miracle in the Making",
+            miracleText: "Consider this: the odds of you being born have been estimated at a mind-boggling 1 in 10<sup>2,685,000,000</sup>. And the chances of life emerging on Earth? Equally astronomical.",
+            miracleConclusion: "Yet, against all odds, we not only exist – we found each other. Meeting you is nothing short of a cosmic miracle.",
+            
+            // Timeline/Gallery images (past year memories)
+            timelineImages: [
+                { src: "", caption: "January 2025", date: "Jan" },
+                { src: "", caption: "February 2025", date: "Feb" },
+                { src: "", caption: "March 2025", date: "Mar" },
+                { src: "", caption: "April 2025", date: "Apr" },
+                { src: "", caption: "May 2025", date: "May" },
+                { src: "", caption: "June 2025", date: "Jun" },
+                { src: "", caption: "July 2025", date: "Jul" },
+                { src: "", caption: "August 2025", date: "Aug" },
+                { src: "", caption: "September 2025", date: "Sep" },
+                { src: "", caption: "October 2025", date: "Oct" },
+                { src: "", caption: "November 2025", date: "Nov" },
+                { src: "", caption: "December 2025", date: "Dec" }
             ],
             
             // Things you love about them
@@ -374,19 +551,50 @@
             document.getElementById('daysSubtitle').textContent = 
                 `That's roughly ${formatNumber(daysData.hours)} hours. Or around ${formatNumber(daysData.heartbeats)} heartbeats.`;
             
-            // Slide 3: Story
-            const storySlide = document.querySelector('.slide:nth-child(3)');
-            const storyHTML = CONFIG.story.map(line => `<p>${line}</p>`).join('');
-            storySlide.innerHTML = `<h2>Our Story</h2>${storyHTML}`;
+            // Slide 3: Miracle message
+            document.getElementById('miracleTitle').textContent = CONFIG.miracleTitle;
+            document.getElementById('miracleText').innerHTML = CONFIG.miracleText;
+            document.getElementById('miracleConclusion').textContent = CONFIG.miracleConclusion;
             
-            // Slide 4: Love reasons
+            // Slide 4: Timeline
+            const timelineScroll = document.getElementById('timelineScroll');
+            timelineScroll.innerHTML = CONFIG.timelineImages.map((item, index) => {
+                const imageContent = item.src 
+                    ? `<img src="${item.src}" alt="${item.caption}">` 
+                    : '💝';
+                
+                return `
+                    <div class="timeline-card">
+                        <div class="timeline-card-image">${imageContent}</div>
+                        <div class="timeline-card-content">
+                            <div class="timeline-card-date">${item.date}</div>
+                            <div class="timeline-card-caption">${item.caption}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add smooth scroll behavior for mobile
+            const timelineScrollEl = document.getElementById('timelineScroll');
+            if (timelineScrollEl) {
+                // Center first card on load
+                setTimeout(() => {
+                    const firstCard = timelineScrollEl.querySelector('.timeline-card');
+                    if (firstCard) {
+                        const scrollLeft = firstCard.offsetLeft - (timelineScrollEl.offsetWidth / 2) + (firstCard.offsetWidth / 2);
+                        timelineScrollEl.scrollLeft = scrollLeft;
+                    }
+                }, 100);
+            }
+            
+            // Slide 5: Love reasons
             const loveList = document.querySelector('.love-list');
             loveList.innerHTML = CONFIG.loveReasons.map(reason => 
                 `<div class="love-item">${reason}</div>`
             ).join('');
             
-            // Slide 6: Final message
-            const finalSlide = document.querySelector('.slide:nth-child(6)');
+            // Slide 7: Final message
+            const finalSlide = document.querySelector('.slide:nth-child(7)');
             finalSlide.innerHTML = `
                 <div class="heart">❤️</div>
                 <h1>I Love You</h1>
