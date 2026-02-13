@@ -556,6 +556,57 @@ body {
     cursor: crosshair;
 }
 
+/* Miracle Slide Styling */
+.miracle-title {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+
+.miracle-text {
+    font-size: 1.3rem;
+    line-height: 2;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    opacity: 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    animation: fadeInUp 1s ease-out 0.8s forwards;
+}
+
+.miracle-line {
+    width: 150px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ff69b4, transparent);
+    margin: 2rem auto;
+    opacity: 0;
+    animation: expandLine 1.2s ease-out 1.3s forwards;
+}
+
+@keyframes expandLine {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 150px;
+        opacity: 1;
+    }
+}
+
+.miracle-conclusion {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    opacity: 0;
+    font-weight: 300;
+    font-style: italic;
+    color: #ff69b4;
+    animation: fadeInUp 1s ease-out 1.8s forwards;
+}
+
 @media (max-width: 768px) {
     .slide h1 { font-size: 2.5rem; }
     .slide h2 { font-size: 1.8rem; }
@@ -564,6 +615,10 @@ body {
     .nav-btn { bottom: 1.5rem; right: 1.5rem; }
     .days-number { font-size: 5rem; }
     .days-text { font-size: 2rem; }
+    
+    .miracle-title { font-size: 2rem; }
+    .miracle-text { font-size: 1.1rem; }
+    .miracle-conclusion { font-size: 1.2rem; }
     
     .timeline-card {
         flex: 0 0 260px;

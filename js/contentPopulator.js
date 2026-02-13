@@ -14,8 +14,6 @@ function populateContent() {
     
     // Slide 3: Miracle message
     document.getElementById('miracleTitle').textContent = CONFIG.miracleTitle;
-    document.getElementById('miracleText').innerHTML = CONFIG.miracleText;
-    document.getElementById('miracleConclusion').textContent = CONFIG.miracleConclusion;
     
     // Slide 4: Timeline
     populateTimeline();

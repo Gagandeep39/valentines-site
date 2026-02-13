@@ -15,7 +15,7 @@ const CONFIG = {
     currentDate: "Feb 14, 2026",
     
     // Miracle message
-    miracleTitle: "A Miracle in the Making",
+    miracleTitle: "A Cosmic Miracle",
     miracleText: "Consider this: the odds of you being born have been estimated at a mind-boggling 1 in 10<sup>2,685,000,000</sup>. And the chances of life emerging on Earth? Equally astronomical.",
     miracleConclusion: "Yet, against all odds, we not only exist – we found each other. Meeting you is nothing short of a cosmic miracle.",
     
