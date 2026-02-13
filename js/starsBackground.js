@@ -17,8 +17,8 @@ function initStarField() {
         const duration = Math.random() * 12 + 8;
         particle.style.animationDuration = duration + 's';
         
-        // Staggered start
-        particle.style.animationDelay = Math.random() * 5 + 's';
+        // Staggered start - minimal delay for immediate visibility
+        particle.style.animationDelay = Math.random() * 0.5 + 's';
         
         // Random size variation
         const size = Math.random() * 3 + 1;

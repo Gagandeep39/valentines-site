@@ -24,13 +24,13 @@ body {
 
 .star {
     position: absolute;
-    width: var(--size, 2px);
-    height: var(--size, 2px);
-    background: radial-gradient(circle, #ff69b4, rgba(255, 105, 180, 0.3));
+    width: var(--size, 3px);
+    height: var(--size, 3px);
+    background: radial-gradient(circle, #ff69b4, rgba(255, 105, 180, 0.5));
     border-radius: 50%;
     opacity: 0;
     animation: float-around 20s ease-in-out infinite, glow 4s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 1), 0 0 30px rgba(255, 105, 180, 0.6);
 }
 
 @keyframes float-around {
@@ -39,20 +39,20 @@ body {
         opacity: 0;
     }
     10% {
-        opacity: 0.6;
+        opacity: 0.8;
     }
     25% {
         transform: translate(40px, -50px) scale(1);
     }
     50% {
         transform: translate(20px, 50px) scale(1.1);
-        opacity: 0.8;
+        opacity: 1;
     }
     75% {
         transform: translate(-30px, -30px) scale(0.9);
     }
     90% {
-        opacity: 0.6;
+        opacity: 0.8;
     }
     100% {
         transform: translate(0, 0) scale(0.5);
@@ -62,10 +62,10 @@ body {
 
 @keyframes glow {
     0%, 100% {
-        box-shadow: 0 0 10px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 105, 180, 0.2);
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 105, 180, 0.4);
     }
     50% {
-        box-shadow: 0 0 20px rgba(255, 105, 180, 1), 0 0 40px rgba(255, 105, 180, 0.6);
+        box-shadow: 0 0 25px rgba(255, 105, 180, 1), 0 0 50px rgba(255, 105, 180, 0.8);
     }
 }
 
