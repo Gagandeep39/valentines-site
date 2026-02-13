@@ -6,13 +6,13 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    background: linear-gradient(135deg, #ffeef8 0%, #ffe0ec 25%, #ffd4e5 50%, #ffb3ba 75%, #ff9fb5 100%);
     color: #fff;
     overflow: hidden;
     height: 100vh;
 }
 
-/* Simple stars background */
+/* Floating rose petals background */
 .stars {
     position: fixed;
     top: 0;
@@ -24,11 +24,26 @@ body {
 
 .star {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.7;
+    font-size: 1.8rem;
+    opacity: 0;
+    animation: float-down linear infinite;
+}
+
+@keyframes float-down {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(100vh) translateX(var(--drift, 0)) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Slide Container */
@@ -54,6 +69,7 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease;
     pointer-events: none;
+    mix-blend-mode: normal;
 }
 
 .slide.active {
@@ -66,13 +82,15 @@ body {
     font-weight: 300;
     margin: 1rem 0;
     letter-spacing: 0.05em;
+    text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
 }
 
 .slide h2 {
     font-size: 2.5rem;
     font-weight: 300;
     margin-bottom: 2rem;
-    color: #ffb3ba;
+    color: #d8254b;
+    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
 }
 
 /* Elegant animations for first slide */
@@ -111,7 +129,8 @@ body {
     font-size: 4rem;
     font-weight: 400;
     letter-spacing: 0.08em;
-    color: #ffb3ba;
+    color: #d40742;
+    text-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
 }
 
 .slide p {
@@ -119,7 +138,8 @@ body {
     font-weight: 300;
     line-height: 1.8;
     margin: 0.5rem 0;
-    opacity: 0.9;
+    opacity: 0.95;
+    text-shadow: 0 1px 3px rgba(255, 107, 107, 0.2);
 }
 
 .heart {
@@ -142,21 +162,24 @@ body {
     color: #fff;
     margin-bottom: 0;
     line-height: 1;
+    text-shadow: 0 3px 8px rgba(255, 107, 107, 0.3);
 }
 
 .days-text {
     font-size: 3rem;
     font-weight: 500;
-    color: #ffb3ba;
+    color: #d40742;
     margin: 1rem 0 2rem 0;
+    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
 }
 
 .days-subtitle {
     font-size: 1.1rem;
     font-weight: 300;
-    opacity: 0.8;
+    opacity: 0.9;
     max-width: 600px;
-    color: #ff6b7a;
+    color: #a0233a;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
 }
 
 /* Elegant Timeline - Mobile First */
@@ -271,7 +294,7 @@ body {
 .timeline-card-date {
     font-size: 1rem;
     font-weight: 600;
-    color: #ffb3ba;
+    color: #d40742;
     margin-bottom: 0.4rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
