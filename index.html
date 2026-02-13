@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine's Day Jason ❤️</title>
+    <title>For Jason ❤️</title>
     <style>
         * {
             margin: 0;
@@ -12,75 +12,30 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
             color: #fff;
             overflow: hidden;
             height: 100vh;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Simple stars background */
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            overflow: hidden;
+            pointer-events: none;
         }
 
-        .particle {
+        .star {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #ff1744;
+            width: 1px;
+            height: 1px;
+            background: white;
             border-radius: 50%;
-            opacity: 0;
-            animation: particleFloat 8s infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Floating Hearts */
-        .heart {
-            position: absolute;
-            font-size: 25px;
-            color: rgba(255, 23, 68, 0.5);
-            animation: heartFloat 12s infinite;
-            z-index: 1;
-        }
-
-        @keyframes heartFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+            opacity: 0.7;
         }
 
         /* Slide Container */
@@ -104,151 +59,106 @@
             text-align: center;
             padding: 2rem;
             opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.6s ease-in-out;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
         .slide.active {
             opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide.prev {
-            opacity: 0;
-            transform: translateX(-100%);
+            pointer-events: auto;
         }
 
         .slide h1 {
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 20px #ff1744, 0 0 30px #ff1744;
-            }
-            50% {
-                text-shadow: 0 0 30px #ff1744, 0 0 40px #ff1744, 0 0 50px #ff1744;
-            }
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin: 1rem 0;
+            letter-spacing: 0.05em;
         }
 
         .slide h2 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: #ff1744;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #ffb3ba;
         }
 
         .slide p {
-            font-size: 1.3rem;
-            margin: 0.8rem 0;
-            max-width: 600px;
-        }
-
-        .big-heart {
-            font-size: 8rem;
-            animation: heartbeat 1.5s infinite;
-            margin: 2rem 0;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.15); }
-            50% { transform: scale(1); }
-        }
-
-        .love-item {
-            background: rgba(255, 23, 68, 0.2);
-            border: 2px solid #ff1744;
-            padding: 1.2rem 2rem;
-            margin: 0.8rem 0;
-            border-radius: 50px;
             font-size: 1.2rem;
-            max-width: 500px;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: popIn 0.5s ease-out forwards;
+            font-weight: 300;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+            opacity: 0.9;
         }
 
-        .love-item:nth-child(1) { animation-delay: 0.2s; }
-        .love-item:nth-child(2) { animation-delay: 0.4s; }
-        .love-item:nth-child(3) { animation-delay: 0.6s; }
-        .love-item:nth-child(4) { animation-delay: 0.8s; }
-        .love-item:nth-child(5) { animation-delay: 1s; }
-
-        @keyframes popIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .heart {
+            font-size: 4rem;
+            margin: 1.5rem 0;
         }
 
         .timeline {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            font-size: 1.8rem;
-            color: #ff1744;
-            font-weight: bold;
+            gap: 2rem;
+            font-size: 1.3rem;
             margin: 2rem 0;
+            opacity: 0.8;
         }
 
-        /* Navigation Button */
+        .love-list {
+            margin-top: 2rem;
+        }
+
+        .love-item {
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            font-weight: 300;
+            opacity: 0.85;
+        }
+
+        /* Navigation */
         .nav-btn {
             position: fixed;
-            bottom: 3rem;
-            right: 3rem;
-            background: linear-gradient(135deg, #ff1744, #f50057);
+            bottom: 2.5rem;
+            right: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 25px;
             cursor: pointer;
             z-index: 10;
             transition: all 0.3s ease;
-            font-family: 'Georgia', serif;
-            box-shadow: 0 5px 20px rgba(255, 23, 68, 0.5);
+            font-weight: 300;
+            letter-spacing: 0.05em;
         }
 
         .nav-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 23, 68, 0.7);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .nav-btn:active {
-            transform: translateY(-1px);
-        }
-
-        /* Scratch Card Styles */
+        /* Scratch Card */
         .scratch-container {
             position: relative;
-            width: 90%;
-            max-width: 600px;
+            width: 500px;
+            max-width: 90%;
             margin: 2rem auto;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .placeholder-image {
             width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #ff1744, #f50057);
+            height: 350px;
+            background: rgba(255, 179, 186, 0.1);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 1.3rem;
-            text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .scratch-image {
-            width: 100%;
-            height: auto;
-            display: block;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
         #scratchCanvas {
@@ -257,72 +167,38 @@
             left: 0;
             width: 100%;
             height: 100%;
-            cursor: pointer;
+            cursor: crosshair;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .slide h1 {
-                font-size: 2.5rem;
-            }
-
-            .slide h2 {
-                font-size: 2rem;
-            }
-
-            .slide p {
-                font-size: 1.1rem;
-            }
-
-            .big-heart {
-                font-size: 5rem;
-            }
-
-            .nav-btn {
-                bottom: 2rem;
-                right: 2rem;
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-
-            .love-item {
-                font-size: 1rem;
-                padding: 1rem 1.5rem;
-            }
-
-            .timeline {
-                font-size: 1.3rem;
-                gap: 1rem;
-            }
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 1.8rem; }
+            .heart { font-size: 3rem; }
+            .timeline { font-size: 1rem; gap: 1rem; }
+            .nav-btn { bottom: 1.5rem; right: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation" id="bgAnimation"></div>
+    <div class="stars" id="stars"></div>
 
-    <!-- Slides Container -->
     <div class="slides-container">
-        <!-- Slide 1: Welcome -->
         <div class="slide active">
             <h1>Happy Valentine's Day</h1>
-            <div class="big-heart">❤️</div>
+            <div class="heart">❤️</div>
             <h1>Jason</h1>
             <p>From Gagan</p>
         </div>
 
-        <!-- Slide 2: Anniversary -->
         <div class="slide">
-            <h2>2 Years Together</h2>
+            <h2>Two Years</h2>
             <div class="timeline">
                 <span>Feb 14, 2024</span>
-                <span>❤️</span>
+                <span>—</span>
                 <span>Feb 14, 2026</span>
             </div>
-            <p>Two incredible years with you</p>
         </div>
 
-        <!-- Slide 3: Our Story -->
         <div class="slide">
             <h2>Our Story</h2>
             <p>Lorem ipsum dolor sit amet</p>
@@ -330,211 +206,137 @@
             <p>Every moment has been magical</p>
         </div>
 
-        <!-- Slide 4: Things I Love -->
         <div class="slide">
             <h2>Why I Love You</h2>
-            <div class="love-item">❤️ Your amazing smile</div>
-            <div class="love-item">❤️ Your kindness</div>
-            <div class="love-item">❤️ Your sense of humor</div>
-            <div class="love-item">❤️ Your intelligence</div>
-            <div class="love-item">❤️ Everything about you</div>
+            <div class="love-list">
+                <div class="love-item">Your amazing smile</div>
+                <div class="love-item">Your kindness</div>
+                <div class="love-item">Your sense of humor</div>
+                <div class="love-item">Your intelligence</div>
+                <div class="love-item">Everything about you</div>
+            </div>
         </div>
 
-        <!-- Slide 5: Scratch Card -->
         <div class="slide">
-            <h2>One More Thing...</h2>
-            <p>Scratch to reveal your surprise!</p>
+            <h2>One More Thing</h2>
+            <p>Scratch to reveal</p>
             <div class="scratch-container">
                 <div class="placeholder-image">
-                    <div>Your special image here!<br><br>Replace with:<br>&lt;img src="your-image.jpg" class="scratch-image" alt="Special Memory"&gt;</div>
+                    Your special image here
                 </div>
                 <canvas id="scratchCanvas"></canvas>
             </div>
         </div>
 
-        <!-- Slide 6: Final Message -->
         <div class="slide">
-            <div class="big-heart">❤️</div>
+            <div class="heart">❤️</div>
             <h1>I Love You</h1>
-            <p>More than words can say</p>
             <p>Forever yours, Gagan</p>
         </div>
     </div>
 
-    <!-- Navigation Button -->
-    <button class="nav-btn" id="nextBtn">Next ❤️</button>
+    <button class="nav-btn" id="nextBtn">Next</button>
 
     <script>
+        // Create simple star field
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = Math.random() * 0.7 + 0.3;
+            starsContainer.appendChild(star);
+        }
+
+        // Slide navigation
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const nextBtn = document.getElementById('nextBtn');
         const totalSlides = slides.length;
 
-        // Create animated background particles
-        function createBackgroundAnimation() {
-            const container = document.getElementById('bgAnimation');
-            
-            // Create particles
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
-                container.appendChild(particle);
-            }
-
-            // Create floating hearts
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 12 + 's';
-                heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
-                container.appendChild(heart);
-            }
-        }
-
-        // Navigate to next slide
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
-            slides[currentSlide].classList.add('prev');
-            
             currentSlide = (currentSlide + 1) % totalSlides;
-            
-            slides[currentSlide].classList.remove('prev');
             slides[currentSlide].classList.add('active');
 
-            // Update button text
-            if (currentSlide === totalSlides - 1) {
-                nextBtn.textContent = 'Replay ❤️';
-            } else {
-                nextBtn.textContent = 'Next ❤️';
-            }
+            nextBtn.textContent = currentSlide === totalSlides - 1 ? 'Restart' : 'Next';
 
-            // Initialize scratch card when reaching that slide
             if (currentSlide === 4 && !window.scratchInitialized) {
-                setTimeout(initScratchCard, 300);
+                setTimeout(initScratchCard, 100);
                 window.scratchInitialized = true;
             }
         }
 
-        // Scratch Card Functionality
-        function initScratchCard() {
-            const canvas = document.getElementById('scratchCanvas');
-            if (!canvas) return;
-            
-            const container = canvas.parentElement;
-            
-            function resizeCanvas() {
-                canvas.width = container.offsetWidth;
-                canvas.height = container.offsetHeight;
-                drawScratchSurface();
-            }
-
-            const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            let lastX = 0;
-            let lastY = 0;
-
-            function drawScratchSurface() {
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, '#ff1744');
-                gradient.addColorStop(1, '#f50057');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-                ctx.font = 'bold 28px Georgia';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('❤️ Scratch Here ❤️', canvas.width / 2, canvas.height / 2);
-                
-                ctx.font = '18px Georgia';
-                ctx.fillText('Use your finger or mouse', canvas.width / 2, canvas.height / 2 + 40);
-            }
-
-            function scratch(x, y) {
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(x, y, 35, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            function getPosition(e) {
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / rect.width;
-                const scaleY = canvas.height / rect.height;
-
-                if (e.touches && e.touches[0]) {
-                    return {
-                        x: (e.touches[0].clientX - rect.left) * scaleX,
-                        y: (e.touches[0].clientY - rect.top) * scaleY
-                    };
-                }
-                return {
-                    x: (e.clientX - rect.left) * scaleX,
-                    y: (e.clientY - rect.top) * scaleY
-                };
-            }
-
-            function startDrawing(e) {
-                isDrawing = true;
-                const pos = getPosition(e);
-                lastX = pos.x;
-                lastY = pos.y;
-                scratch(pos.x, pos.y);
-            }
-
-            function draw(e) {
-                if (!isDrawing) return;
-                e.preventDefault();
-                
-                const pos = getPosition(e);
-                const distance = Math.sqrt(Math.pow(pos.x - lastX, 2) + Math.pow(pos.y - lastY, 2));
-                const steps = Math.max(1, Math.floor(distance / 10));
-
-                for (let i = 0; i <= steps; i++) {
-                    const x = lastX + (pos.x - lastX) * (i / steps);
-                    const y = lastY + (pos.y - lastY) * (i / steps);
-                    scratch(x, y);
-                }
-
-                lastX = pos.x;
-                lastY = pos.y;
-            }
-
-            function stopDrawing() {
-                isDrawing = false;
-            }
-
-            canvas.addEventListener('mousedown', startDrawing);
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', stopDrawing);
-            canvas.addEventListener('mouseleave', stopDrawing);
-            canvas.addEventListener('touchstart', startDrawing);
-            canvas.addEventListener('touchmove', draw);
-            canvas.addEventListener('touchend', stopDrawing);
-
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-        }
-
-        // Event listeners
         nextBtn.addEventListener('click', nextSlide);
-
-        // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
                 nextSlide();
             }
         });
 
-        // Initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            createBackgroundAnimation();
-        });
+        // Simple scratch card
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            if (!canvas) return;
+
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+
+            // Draw scratch surface
+            ctx.fillStyle = 'rgba(255, 179, 186, 0.9)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Scratch here', canvas.width / 2, canvas.height / 2);
+
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            }
+
+            canvas.addEventListener('mousedown', () => isDrawing = true);
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawing) {
+                    const pos = getPos(e);
+                    scratch(pos.x, pos.y);
+                }
+            });
+
+            canvas.addEventListener('touchstart', (e) => {
+                isDrawing = true;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (isDrawing) {
+                    const pos = getPos(e);
+                    scratch(pos.x, pos.y);
+                }
+            });
+            canvas.addEventListener('touchend', () => isDrawing = false);
+        }
     </script>
 </body>
 </html>
