@@ -124,17 +124,51 @@ body {
 
 .fade-in-up-delay-1 {
     opacity: 0;
-    animation: fadeInUp 1.2s ease-out 0.4s forwards;
+    animation: fadeInUp 1.2s ease-out 0.4s forwards, gentleFloat 4s ease-in-out 2s infinite;
 }
 
 .fade-in-up-delay-2 {
     opacity: 0;
-    animation: fadeInUp 1.2s ease-out 0.8s forwards;
+    animation: fadeInScale 1.5s ease-out 0.8s forwards;
 }
 
 .fade-in-up-delay-3 {
     opacity: 0;
-    animation: fadeInUp 1.2s ease-out 1.2s forwards;
+    animation: heartBeat 1.5s ease-out 1.6s forwards;
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.shimmer-text {
+    position: relative;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.8) 0%, 
+        rgba(255, 182, 193, 1) 25%,
+        rgba(255, 105, 180, 1) 50%,
+        rgba(255, 182, 193, 1) 75%,
+        rgba(255, 255, 255, 0.8) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerAnimation 4s linear infinite 2.5s;
+}
+
+@keyframes shimmerAnimation {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
 }
 
 @keyframes fadeInUp {
@@ -148,12 +182,106 @@ body {
     }
 }
 
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(0) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes heartBeat {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    40% {
+        transform: scale(0.9);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    80% {
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .special-name {
     font-size: 4rem;
     font-weight: 400;
     letter-spacing: 0.08em;
     color: #ff69b4;
     text-shadow: 0 0 50px rgba(255, 105, 180, 1), 0 0 80px rgba(255, 105, 180, 0.7), 0 2px 6px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    animation: fadeInScaleGlow 1.5s ease-out 0.8s forwards, glowPulse 3s ease-in-out infinite 2.5s;
+}
+
+@keyframes fadeInScaleGlow {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.8);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(0) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 0 0 50px rgba(255, 105, 180, 1), 0 0 80px rgba(255, 105, 180, 0.7), 0 2px 6px rgba(0, 0, 0, 0.9);
+    }
+    50% {
+        text-shadow: 0 0 70px rgba(255, 105, 180, 1), 0 0 120px rgba(255, 105, 180, 0.9), 0 2px 6px rgba(0, 0, 0, 0.9);
+        letter-spacing: 0.12em;
+    }
+}
+
+/* Typewriter effect */
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid rgba(255, 105, 180, 0.8);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 2s steps(25, end) forwards, blink 0.75s step-end 2s;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+        border-right-color: transparent;
+    }
+}
+
+@keyframes blink {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: rgba(255, 105, 180, 0.8);
+    }
 }
 
 .slide p {
@@ -168,6 +296,26 @@ body {
 .heart {
     font-size: 4rem;
     margin: 1.5rem 0;
+    display: inline-block;
+    animation: gentleHeartbeat 2s ease-in-out infinite;
+}
+
+@keyframes gentleHeartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.1);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.1);
+    }
+    40% {
+        transform: scale(1);
+    }
 }
 
 .timeline {
