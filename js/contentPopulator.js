@@ -30,7 +30,7 @@ function populateContent() {
  */
 function populateTimeline() {
     const timelineScroll = document.getElementById('timelineScroll');
-    timelineScroll.innerHTML = CONFIG.timelineImages.map((item, index) => {
+    const timelineCards = CONFIG.timelineImages.map((item, index) => {
         const imageContent = item.src 
             ? `<img src="${item.src}" alt="${item.caption}">` 
             : '💝';
@@ -45,6 +45,17 @@ function populateTimeline() {
             </div>
         `;
     }).join('');
+    
+    // Add placeholder card at the end
+    const placeholderCard = `
+        <div class="timeline-card placeholder-card">
+            <div class="placeholder-card-content">
+                <p class="placeholder-text">Noticed something… it’s only you in these pics. Clearly, we need more photos together so I can keep making cheesy stuff like this!</p>
+            </div>
+        </div>
+    `;
+    
+    timelineScroll.innerHTML = timelineCards + placeholderCard;
     
     // Center first card on load
     setTimeout(() => {
