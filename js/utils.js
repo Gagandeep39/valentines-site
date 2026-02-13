@@ -22,6 +22,33 @@ function formatNumber(num) {
 }
 
 /**
+ * Animate a number from 0 to target value
+ */
+function animateNumber(element, targetValue, duration = 2000, formatting = true) {
+    const startTime = performance.now();
+    const startValue = 0;
+    
+    function updateNumber(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation (ease-out)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOut);
+        
+        element.textContent = formatting ? formatNumber(currentValue) : currentValue;
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+        } else {
+            element.textContent = formatting ? formatNumber(targetValue) : targetValue;
+        }
+    }
+    
+    requestAnimationFrame(updateNumber);
+}
+
+/**
  * Get position from mouse or touch event
  */
 function getEventPosition(e, canvas) {

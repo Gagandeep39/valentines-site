@@ -5,11 +5,12 @@ function populateContent() {
     // Slide 1: Partner name
     document.getElementById('partnerName').textContent = CONFIG.partnerName;
     
-    // Slide 2: Days together calculation
-    const daysData = calculateDaysTogether();
-    document.getElementById('daysNumber').textContent = daysData.days;
+    // Slide 2: Days together calculation - store data for animation
+    window.daysTogetherData = calculateDaysTogether();
+    // Set initial values to 0 (will be animated when slide is shown)
+    document.getElementById('daysNumber').textContent = '0';
     document.getElementById('daysSubtitle').textContent = 
-        `That's roughly ${formatNumber(daysData.hours)} hours. Or around ${formatNumber(daysData.heartbeats)} heartbeats.`;
+        `That's roughly 0 hours. Or around 0 heartbeats.`;
     
     // Slide 3: Miracle message
     document.getElementById('miracleTitle').textContent = CONFIG.miracleTitle;
@@ -55,4 +56,42 @@ function populateTimeline() {
             timelineScroll.scrollLeft = scrollLeft;
         }
     }, 100);
+}
+
+/**
+ * Animate the days together numbers
+ */
+function animateDaysNumbers() {
+    if (!window.daysTogetherData || window.daysAnimated) return;
+    
+    const data = window.daysTogetherData;
+    const daysElement = document.getElementById('daysNumber');
+    const subtitleElement = document.getElementById('daysSubtitle');
+    
+    // Animate the main days number
+    animateNumber(daysElement, data.days, 2000, false);
+    
+    // Animate the subtitle text with hours and heartbeats
+    const startTime = performance.now();
+    function updateSubtitle(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / 2000, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        
+        const currentHours = Math.floor(data.hours * easeOut);
+        const currentHeartbeats = Math.floor(data.heartbeats * easeOut);
+        
+        subtitleElement.textContent = 
+            `That's roughly ${formatNumber(currentHours)} hours. Or around ${formatNumber(currentHeartbeats)} heartbeats.`;
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateSubtitle);
+        } else {
+            subtitleElement.textContent = 
+                `That's roughly ${formatNumber(data.hours)} hours. Or around ${formatNumber(data.heartbeats)} heartbeats.`;
+        }
+    }
+    requestAnimationFrame(updateSubtitle);
+    
+    window.daysAnimated = true;
 }

@@ -30,6 +30,11 @@ function nextSlide() {
     // Hide button on scratch card page (slide 4), show on others
     nextBtn.style.display = currentSlide === 4 ? 'none' : 'block';
 
+    // Animate days numbers when reaching slide 2 (index 1)
+    if (currentSlide === 1 && typeof animateDaysNumbers === 'function') {
+        setTimeout(animateDaysNumbers, 100);
+    }
+
     // Initialize scratch card when reaching that slide
     if (currentSlide === 4 && !window.scratchInitialized) {
         setTimeout(initScratchCard, 100);
