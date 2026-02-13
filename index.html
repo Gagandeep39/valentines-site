@@ -468,31 +468,18 @@
         </div>
 
         <div class="slide">
-            <h2>Why I Love You</h2>
-            <div class="love-list">
-                <div class="love-item">Your amazing smile</div>
-                <div class="love-item">Your kindness</div>
-                <div class="love-item">Your sense of humor</div>
-                <div class="love-item">Your intelligence</div>
-                <div class="love-item">Everything about you</div>
-            </div>
-        </div>
-
-        <div class="slide">
             <h2>One More Thing</h2>
             <p>Scratch to reveal</p>
-            <div class="scratch-container">
+            <div class="scratch-container" style="min-height: 350px;">
                 <div class="placeholder-image">
                     Your special image here
                 </div>
                 <canvas id="scratchCanvas"></canvas>
             </div>
-        </div>
-
-        <div class="slide">
-            <div class="heart">❤️</div>
-            <h1>I Love You</h1>
-            <p>Forever yours, Gagan</p>
+            <div id="scratchMessage" style="display: none; margin-top: 2rem; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; text-align: center;">
+                <div class="heart">❤️</div>
+                <p style="font-size: 1.5rem; margin-top: 1rem;">Forever yours, Gagan</p>
+            </div>
         </div>
     </div>
 
@@ -533,15 +520,6 @@
                 { src: "", caption: "October 2025", date: "Oct" },
                 { src: "", caption: "November 2025", date: "Nov" },
                 { src: "", caption: "December 2025", date: "Dec" }
-            ],
-            
-            // Things you love about them
-            loveReasons: [
-                "Your amazing smile",
-                "Your kindness",
-                "Your sense of humor",
-                "Your intelligence",
-                "Everything about you"
             ],
             
             // Final message
@@ -626,19 +604,7 @@
                 }, 100);
             }
             
-            // Slide 5: Love reasons
-            const loveList = document.querySelector('.love-list');
-            loveList.innerHTML = CONFIG.loveReasons.map(reason => 
-                `<div class="love-item">${reason}</div>`
-            ).join('');
-            
-            // Slide 7: Final message
-            const finalSlide = document.querySelector('.slide:nth-child(7)');
-            finalSlide.innerHTML = `
-                <div class="heart">❤️</div>
-                <h1>I Love You</h1>
-                <p>${CONFIG.finalMessage}</p>
-            `;
+
             
             // Scratch card image
             if (CONFIG.scratchCardImage) {
@@ -736,6 +702,34 @@
                 }
             });
             canvas.addEventListener('touchend', () => isDrawing = false);
+            
+            // Check if scratched enough and show message
+            let hasRevealed = false;
+            const checkScratchProgress = setInterval(() => {
+                if (hasRevealed) return;
+                
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                let transparentPixels = 0;
+                
+                for (let i = 3; i < data.length; i += 4) {
+                    if (data[i] === 0) {
+                        transparentPixels++;
+                    }
+                }
+                
+                const revealPercentage = (transparentPixels / (data.length / 4)) * 100;
+                
+                if (revealPercentage > 50) {
+                    hasRevealed = true;
+                    clearInterval(checkScratchProgress);
+                    
+                    // Hide canvas and show message
+                    canvas.style.display = 'none';
+                    const message = document.getElementById('scratchMessage');
+                    message.style.display = 'block';
+                }
+            }, 200);
         }
     </script>
 </body>
