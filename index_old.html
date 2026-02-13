@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Jason ❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Simple stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            z-index: 2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin: 1rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #ffb3ba;
+        }
+
+        /* Elegant animations for first slide */
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        .fade-in-up-delay-1 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.4s forwards;
+        }
+
+        .fade-in-up-delay-2 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.8s forwards;
+        }
+
+        .fade-in-up-delay-3 {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 1.2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .special-name {
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            color: #ffb3ba;
+        }
+
+        .slide p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        .heart {
+            font-size: 4rem;
+            margin: 1.5rem 0;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            font-size: 1.3rem;
+            margin: 2rem 0;
+            opacity: 0.8;
+        }
+
+        .days-number {
+            font-size: 8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0;
+            line-height: 1;
+        }
+
+        .days-text {
+            font-size: 3rem;
+            font-weight: 500;
+            color: #ffb3ba;
+            margin: 1rem 0 2rem 0;
+        }
+
+        .days-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+            max-width: 600px;
+            color: #ff6b7a;
+        }
+
+        /* Elegant Timeline - Mobile First */
+        .timeline-container {
+            width: 100%;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .timeline-container::before,
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .timeline-container::before {
+            left: 0;
+            background: linear-gradient(to right, #090a0f, transparent);
+        }
+
+        .timeline-container::after {
+            right: 0;
+            background: linear-gradient(to left, #090a0f, transparent);
+        }
+
+        .timeline-scroll {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 1.5rem;
+            padding-left: calc(50% - 140px);
+            padding-right: calc(50% - 140px);
+            margin: 0 auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
+
+        .timeline-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .timeline-card {
+            flex: 0 0 280px;
+            height: 360px;
+            scroll-snap-align: center;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255, 179, 186, 0.08), rgba(138, 43, 226, 0.08));
+            border: 1px solid rgba(255, 179, 186, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(255, 179, 186, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(255, 179, 186, 0.35);
+            border-color: rgba(255, 179, 186, 0.5);
+        }
+
+        .timeline-card-image {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, rgba(255, 179, 186, 0.2), rgba(138, 43, 226, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                left: 100%;
+            }
+        }
+
+        .timeline-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .timeline-card-content {
+            padding: 1.2rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-card-date {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffb3ba;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .timeline-card-caption {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.5;
+            margin-top: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .love-list {
+            margin-top: 2rem;
+        }
+
+        .love-item {
+            font-size: 1.1rem;
+            padding: 0.8rem 0;
+            font-weight: 300;
+            opacity: 0.85;
+        }
+
+        /* Navigation */
+        .nav-btn {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Scratch Card */
+        .scratch-container {
+            position: relative;
+            width: 500px;
+            max-width: 90%;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 350px;
+            background: rgba(255, 179, 186, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        #scratchCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        @media (max-width: 768px) {
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 1.8rem; }
+            .heart { font-size: 3rem; }
+            .timeline { font-size: 1rem; gap: 1rem; }
+            .nav-btn { bottom: 1.5rem; right: 1.5rem; }
+            .days-number { font-size: 5rem; }
+            .days-text { font-size: 2rem; }
+            
+            .timeline-card {
+                flex: 0 0 260px;
+                height: 340px;
+            }
+            
+            .timeline-card-image {
+                height: 240px;
+                font-size: 3.5rem;
+            }
+            
+            .timeline-scroll {
+                padding: 1rem;
+                padding-left: calc(50% - 130px);
+                padding-right: calc(50% - 130px);
+                gap: 1rem;
+            }
+            
+            .timeline-container::before,
+            .timeline-container::after {
+                width: 40px;
+            }
+            
+            .scroll-indicator {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-card {
+                flex: 0 0 240px;
+                height: 320px;
+            }
+            
+            .timeline-card-image {
+                height: 220px;
+                font-size: 3rem;
+            }
+            
+            .timeline-card-content {
+                padding: 1rem;
+            }
+            
+            .timeline-scroll {
+                padding: 1rem;
+                padding-left: calc(50% - 120px);
+                padding-right: calc(50% - 120px);
+            }
+            
+            .timeline-container::before,
+            .timeline-container::after {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="slides-container">
+        <div class="slide active">
+            <p class="fade-in-up" style="font-size: 1.4rem; margin-bottom: 3rem;">Happy Valentine's Day...</p>
+            <p class="fade-in-up-delay-1" style="font-size: 1.3rem; opacity: 0.8; margin-bottom: 2rem;">To the most special person</p>
+            <h1 class="special-name fade-in-up-delay-2" id="partnerName">Jason</h1>
+            <div class="heart fade-in-up-delay-3">❤️</div>
+        </div>
+
+        <div class="slide">
+            <div class="days-number" id="daysNumber">730</div>
+            <h2 class="days-text">days together</h2>
+            <p class="days-subtitle" id="daysSubtitle">That's roughly 17,520 hours. Or around 7,35,84,000 heartbeats.</p>
+        </div>
+
+        <div class="slide">
+            <h2 id="miracleTitle">A Miracle in the Making</h2>
+            <p id="miracleText" style="max-width: 700px; line-height: 1.9; margin-bottom: 1.5rem;">Consider this: the odds of you being born have been estimated at a mind-boggling 1 in 10<sup>2,685,000,000</sup>. And the chances of life emerging on Earth? Equally astronomical.</p>
+            <p id="miracleConclusion" style="max-width: 700px; line-height: 1.9; font-weight: 400;">Yet, against all odds, we not only exist – we found each other. Meeting you is nothing short of a cosmic miracle.</p>
+        </div>
+
+        <div class="slide" style="overflow: hidden;">
+            <h2 style="margin-bottom: 0.5rem;">Our Story in Moments</h2>
+            <p style="opacity: 0.7; margin-bottom: 0.5rem; font-size: 1rem;">Swipe to explore our memories</p>
+            <div class="timeline-container">
+                <div class="timeline-scroll" id="timelineScroll">
+                    <!-- Timeline will be populated here -->
+                </div>
+            </div>
+            <div class="scroll-indicator">← Swipe →</div>
+        </div>
+
+        <div class="slide">
+            <h2>One More Thing</h2>
+            <p>Scratch to reveal</p>
+            <div class="scratch-container" style="min-height: 350px;">
+                <div class="placeholder-image">
+                    Your special image here
+                </div>
+                <canvas id="scratchCanvas"></canvas>
+            </div>
+            <div id="scratchMessage" style="visibility: hidden; margin-top: 2rem; opacity: 0; animation: fadeInUp 1.2s ease-out forwards; text-align: center;">
+                <div class="heart">❤️</div>
+                <p style="font-size: 1.5rem; margin-top: 1rem;">Forever yours, Gagan</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="nav-btn" id="nextBtn">Next</button>
+
+    <script>
+        // ========================================
+        // CUSTOMIZE YOUR CONTENT HERE
+        // ========================================
+        const CONFIG = {
+            yourName: "Gagan",
+            partnerName: "Jason",
+            
+            // Dates (will calculate days automatically)
+            dateMetActual: new Date('2024-02-14'),
+            currentDateActual: new Date('2026-02-14'),
+            
+            // Display format for dates
+            dateMet: "Feb 14, 2024",
+            currentDate: "Feb 14, 2026",
+            
+            // Miracle message
+            miracleTitle: "A Miracle in the Making",
+            miracleText: "Consider this: the odds of you being born have been estimated at a mind-boggling 1 in 10<sup>2,685,000,000</sup>. And the chances of life emerging on Earth? Equally astronomical.",
+            miracleConclusion: "Yet, against all odds, we not only exist – we found each other. Meeting you is nothing short of a cosmic miracle.",
+            
+            // Timeline/Gallery images (past year memories)
+            timelineImages: [
+                { src: "", caption: "January 2025", date: "Jan" },
+                { src: "", caption: "February 2025", date: "Feb" },
+                { src: "", caption: "March 2025", date: "Mar" },
+                { src: "", caption: "April 2025", date: "Apr" },
+                { src: "", caption: "May 2025", date: "May" },
+                { src: "", caption: "June 2025", date: "Jun" },
+                { src: "", caption: "July 2025", date: "Jul" },
+                { src: "", caption: "August 2025", date: "Aug" },
+                { src: "", caption: "September 2025", date: "Sep" },
+                { src: "", caption: "October 2025", date: "Oct" },
+                { src: "", caption: "November 2025", date: "Nov" },
+                { src: "", caption: "December 2025", date: "Dec" }
+            ],
+            
+            // Final message
+            finalMessage: "Forever yours, Gagan",
+            
+            // Image for scratch card (leave empty for placeholder)
+            scratchCardImage: "" // Example: "image.jpg"
+        };
+        // ========================================
+        // END OF CUSTOMIZATION
+        // ========================================
+
+        // Create simple star field
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.opacity = Math.random() * 0.7 + 0.3;
+            starsContainer.appendChild(star);
+        }
+        
+        // Calculate days together
+        function calculateDaysTogether() {
+            const diffTime = Math.abs(CONFIG.currentDateActual - CONFIG.dateMetActual);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const hours = diffDays * 24;
+            const heartbeats = Math.round(diffDays * 24 * 60 * 60 * 1.4); // Assuming ~1.4 beats per second
+            
+            return { days: diffDays, hours: hours, heartbeats: heartbeats };
+        }
+        
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Populate content dynamically
+        function populateContent() {
+            // Slide 1: Partner name
+            document.getElementById('partnerName').textContent = CONFIG.partnerName;
+            
+            // Slide 2: Days together calculation
+            const daysData = calculateDaysTogether();
+            document.getElementById('daysNumber').textContent = daysData.days;
+            document.getElementById('daysSubtitle').textContent = 
+                `That's roughly ${formatNumber(daysData.hours)} hours. Or around ${formatNumber(daysData.heartbeats)} heartbeats.`;
+            
+            // Slide 3: Miracle message
+            document.getElementById('miracleTitle').textContent = CONFIG.miracleTitle;
+            document.getElementById('miracleText').innerHTML = CONFIG.miracleText;
+            document.getElementById('miracleConclusion').textContent = CONFIG.miracleConclusion;
+            
+            // Slide 4: Timeline
+            const timelineScroll = document.getElementById('timelineScroll');
+            timelineScroll.innerHTML = CONFIG.timelineImages.map((item, index) => {
+                const imageContent = item.src 
+                    ? `<img src="${item.src}" alt="${item.caption}">` 
+                    : '💝';
+                
+                return `
+                    <div class="timeline-card">
+                        <div class="timeline-card-image">${imageContent}</div>
+                        <div class="timeline-card-content">
+                            <div class="timeline-card-date">${item.date}</div>
+                            <div class="timeline-card-caption">${item.caption}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add smooth scroll behavior for mobile
+            const timelineScrollEl = document.getElementById('timelineScroll');
+            if (timelineScrollEl) {
+                // Center first card on load
+                setTimeout(() => {
+                    const firstCard = timelineScrollEl.querySelector('.timeline-card');
+                    if (firstCard) {
+                        const scrollLeft = firstCard.offsetLeft - (timelineScrollEl.offsetWidth / 2) + (firstCard.offsetWidth / 2);
+                        timelineScrollEl.scrollLeft = scrollLeft;
+                    }
+                }, 100);
+            }
+            
+
+            
+            // Scratch card image
+            if (CONFIG.scratchCardImage) {
+                const placeholder = document.querySelector('.placeholder-image');
+                placeholder.innerHTML = `<img src="${CONFIG.scratchCardImage}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            }
+        }
+        
+        populateContent();
+
+        // Slide navigation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+
+            // Hide button on scratch card page, show on others
+            nextBtn.style.display = currentSlide === 4 ? 'none' : 'block';
+
+            if (currentSlide === 4 && !window.scratchInitialized) {
+                setTimeout(initScratchCard, 100);
+                window.scratchInitialized = true;
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            }
+        });
+
+        // Simple scratch card
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            if (!canvas) return;
+
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+
+            const ctx = canvas.getContext('2d');
+            let isDrawing = false;
+
+            // Draw scratch surface
+            ctx.fillStyle = 'rgba(255, 179, 186, 0.9)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            ctx.font = '20px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Scratch here', canvas.width / 2, canvas.height / 2);
+
+            function scratch(x, y) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            }
+
+            canvas.addEventListener('mousedown', () => isDrawing = true);
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawing) {
+                    const pos = getPos(e);
+                    scratch(pos.x, pos.y);
+                }
+            });
+
+            canvas.addEventListener('touchstart', (e) => {
+                isDrawing = true;
+                const pos = getPos(e);
+                scratch(pos.x, pos.y);
+            });
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (isDrawing) {
+                    const pos = getPos(e);
+                    scratch(pos.x, pos.y);
+                }
+            });
+            canvas.addEventListener('touchend', () => isDrawing = false);
+            
+            // Check if scratched enough and show message
+            let hasRevealed = false;
+            const checkScratchProgress = setInterval(() => {
+                if (hasRevealed) return;
+                
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                let transparentPixels = 0;
+                
+                for (let i = 3; i < data.length; i += 4) {
+                    if (data[i] === 0) {
+                        transparentPixels++;
+                    }
+                }
+                
+                const revealPercentage = (transparentPixels / (data.length / 4)) * 100;
+                
+                if (revealPercentage > 70) {
+                    hasRevealed = true;
+                    clearInterval(checkScratchProgress);
+                    
+                    // Hide canvas and show message
+                    // canvas.style.display = 'none';
+                    const message = document.getElementById('scratchMessage');
+                    message.style.visibility = 'visible';
+                }
+            }, 200);
+        }
+    </script>
+</body>
+</html>
