@@ -6,7 +6,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: linear-gradient(135deg, #ffeef8 0%, #ffe0ec 25%, #ffd4e5 50%, #ffb3ba 75%, #ff9fb5 100%);
+    background: linear-gradient(135deg, #000000 0%, #0a0505 25%, #0f0709 50%, #140a0d 75%, #0a0505 100%);
     color: #fff;
     overflow: hidden;
     height: 100vh;
@@ -82,15 +82,15 @@ body {
     font-weight: 300;
     margin: 1rem 0;
     letter-spacing: 0.05em;
-    text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    text-shadow: 0 0 40px rgba(255, 105, 180, 1), 0 0 80px rgba(255, 105, 180, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
 }
 
 .slide h2 {
     font-size: 2.5rem;
     font-weight: 300;
     margin-bottom: 2rem;
-    color: #d8254b;
-    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
+    color: #ff69b4;
+    text-shadow: 0 0 35px rgba(255, 105, 180, 0.9), 0 0 60px rgba(255, 105, 180, 0.5), 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* Elegant animations for first slide */
@@ -129,8 +129,8 @@ body {
     font-size: 4rem;
     font-weight: 400;
     letter-spacing: 0.08em;
-    color: #d40742;
-    text-shadow: 0 2px 6px rgba(255, 107, 107, 0.4);
+    color: #ff69b4;
+    text-shadow: 0 0 50px rgba(255, 105, 180, 1), 0 0 80px rgba(255, 105, 180, 0.7), 0 2px 6px rgba(0, 0, 0, 0.9);
 }
 
 .slide p {
@@ -139,7 +139,7 @@ body {
     line-height: 1.8;
     margin: 0.5rem 0;
     opacity: 0.95;
-    text-shadow: 0 1px 3px rgba(255, 107, 107, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .heart {
@@ -162,24 +162,24 @@ body {
     color: #fff;
     margin-bottom: 0;
     line-height: 1;
-    text-shadow: 0 3px 8px rgba(255, 107, 107, 0.3);
+    text-shadow: 0 0 40px rgba(255, 105, 180, 0.8), 0 0 80px rgba(255, 105, 180, 0.4), 0 3px 8px rgba(0, 0, 0, 0.9);
 }
 
 .days-text {
     font-size: 3rem;
     font-weight: 500;
-    color: #d40742;
+    color: #ff69b4;
     margin: 1rem 0 2rem 0;
-    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 35px rgba(255, 105, 180, 0.9), 0 0 60px rgba(255, 105, 180, 0.5), 0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .days-subtitle {
     font-size: 1.1rem;
     font-weight: 300;
-    opacity: 0.9;
+    opacity: 0.95;
     max-width: 600px;
-    color: #a0233a;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.3);
+    color: #ffb3d9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Elegant Timeline - Mobile First */
@@ -294,7 +294,7 @@ body {
 .timeline-card-date {
     font-size: 1rem;
     font-weight: 600;
-    color: #d40742;
+    color: #ff69b4;
     margin-bottom: 0.4rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
