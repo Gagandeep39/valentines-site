@@ -13,33 +13,36 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
         }
 
-        /* Floating Hearts Animation */
-        .hearts-container {
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            z-index: 0;
             overflow: hidden;
         }
 
-        .heart {
+        .particle {
             position: absolute;
-            font-size: 20px;
-            color: rgba(255, 100, 100, 0.6);
-            animation: float 15s infinite;
+            width: 4px;
+            height: 4px;
+            background: #ff1744;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 8s infinite;
         }
 
-        @keyframes float {
+        @keyframes particleFloat {
             0% {
-                transform: translateY(100vh) rotate(0deg);
+                transform: translateY(100vh) translateX(0) scale(0);
                 opacity: 0;
             }
             10% {
@@ -49,176 +52,203 @@
                 opacity: 1;
             }
             100% {
+                transform: translateY(-100vh) translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            color: rgba(255, 23, 68, 0.5);
+            animation: heartFloat 12s infinite;
+            z-index: 1;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
                 transform: translateY(-100vh) rotate(360deg);
                 opacity: 0;
             }
         }
 
-        /* Header Section */
-        .header {
+        /* Slide Container */
+        .slides-container {
             position: relative;
+            width: 100%;
             height: 100vh;
+            z-index: 2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: white;
-            z-index: 2;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s ease-in-out;
         }
 
-        .header h1 {
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        .slide h1 {
             font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s ease-out;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite;
         }
 
-        .header p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.5s both;
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px #ff1744, 0 0 30px #ff1744;
+            }
+            50% {
+                text-shadow: 0 0 30px #ff1744, 0 0 40px #ff1744, 0 0 50px #ff1744;
+            }
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ff1744;
+        }
+
+        .slide p {
+            font-size: 1.3rem;
+            margin: 0.8rem 0;
+            max-width: 600px;
         }
 
         .big-heart {
-            font-size: 6rem;
+            font-size: 8rem;
             animation: heartbeat 1.5s infinite;
             margin: 2rem 0;
         }
 
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
+            25% { transform: scale(1.15); }
             50% { transform: scale(1); }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Content Sections */
-        .section {
-            position: relative;
-            background: white;
-            margin: 2rem auto;
-            padding: 4rem 2rem;
-            max-width: 800px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-        }
-
-        .section h2 {
-            font-size: 2.5rem;
-            color: #d63031;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .section p {
+        .love-item {
+            background: rgba(255, 23, 68, 0.2);
+            border: 2px solid #ff1744;
+            padding: 1.2rem 2rem;
+            margin: 0.8rem 0;
+            border-radius: 50px;
             font-size: 1.2rem;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 1rem;
+            max-width: 500px;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: popIn 0.5s ease-out forwards;
+        }
+
+        .love-item:nth-child(1) { animation-delay: 0.2s; }
+        .love-item:nth-child(2) { animation-delay: 0.4s; }
+        .love-item:nth-child(3) { animation-delay: 0.6s; }
+        .love-item:nth-child(4) { animation-delay: 0.8s; }
+        .love-item:nth-child(5) { animation-delay: 1s; }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .timeline {
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            font-size: 1.5rem;
-            color: #d63031;
+            gap: 1.5rem;
+            font-size: 1.8rem;
+            color: #ff1744;
             font-weight: bold;
+            margin: 2rem 0;
         }
 
-        .list-item {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        /* Navigation Button */
+        .nav-btn {
+            position: fixed;
+            bottom: 3rem;
+            right: 3rem;
+            background: linear-gradient(135deg, #ff1744, #f50057);
             color: white;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(214, 48, 49, 0.3);
-            transform: translateX(-20px);
-            opacity: 0;
-            animation: slideIn 0.6s ease-out forwards;
-        }
-
-        .list-item:nth-child(1) { animation-delay: 0.1s; }
-        .list-item:nth-child(2) { animation-delay: 0.2s; }
-        .list-item:nth-child(3) { animation-delay: 0.3s; }
-        .list-item:nth-child(4) { animation-delay: 0.4s; }
-        .list-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes slideIn {
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Scratch Card Section */
-        .scratch-section {
-            position: relative;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            margin: 2rem auto 4rem;
-            padding: 4rem 2rem;
-            max-width: 800px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-
-        .scratch-section h2 {
-            font-size: 2.5rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .scratch-instruction {
-            text-align: center;
-            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            box-shadow: 0 5px 20px rgba(255, 23, 68, 0.5);
         }
 
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 23, 68, 0.7);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Scratch Card Styles */
         .scratch-container {
             position: relative;
-            width: 100%;
+            width: 90%;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 2rem auto;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255, 23, 68, 0.5);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #ff1744, #f50057);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
         }
 
         .scratch-image {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 15px;
         }
 
         #scratchCanvas {
@@ -228,151 +258,175 @@
             width: 100%;
             height: 100%;
             cursor: pointer;
-            border-radius: 15px;
-        }
-
-        .placeholder-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.5rem;
-            text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: white;
-            font-size: 1.2rem;
-            z-index: 2;
-            position: relative;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .header h1 {
+            .slide h1 {
                 font-size: 2.5rem;
             }
 
-            .header p {
-                font-size: 1.2rem;
-            }
-
-            .big-heart {
-                font-size: 4rem;
-            }
-
-            .section h2 {
+            .slide h2 {
                 font-size: 2rem;
             }
 
-            .section p {
+            .slide p {
+                font-size: 1.1rem;
+            }
+
+            .big-heart {
+                font-size: 5rem;
+            }
+
+            .nav-btn {
+                bottom: 2rem;
+                right: 2rem;
+                padding: 0.8rem 2rem;
                 font-size: 1rem;
+            }
+
+            .love-item {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+            }
+
+            .timeline {
+                font-size: 1.3rem;
+                gap: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Hearts Background -->
-    <div class="hearts-container" id="heartsContainer"></div>
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
 
-    <!-- Header Section -->
-    <div class="header">
-        <h1>Happy Valentine's Day</h1>
-        <div class="big-heart">❤️</div>
-        <h1>Jason</h1>
-        <p>From your loving Gagan</p>
-    </div>
+    <!-- Slides Container -->
+    <div class="slides-container">
+        <!-- Slide 1: Welcome -->
+        <div class="slide active">
+            <h1>Happy Valentine's Day</h1>
+            <div class="big-heart">❤️</div>
+            <h1>Jason</h1>
+            <p>From Gagan</p>
+        </div>
 
-    <!-- Our Story Section -->
-    <div class="section">
-        <h2>Our Story 💕</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="timeline">
-            <span>February 14, 2024</span>
-            <span>❤️</span>
-            <span>2 Years Together</span>
-        </div>
-    </div>
-
-    <!-- Things I Love Section -->
-    <div class="section">
-        <h2>Things I Love About You 💖</h2>
-        <div class="list-item">
-            <strong>Your Amazing Smile:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Your smile lights up my whole world.
-        </div>
-        <div class="list-item">
-            <strong>Your Kindness:</strong> Duis aute irure dolor in reprehenderit. The way you care for others is truly beautiful.
-        </div>
-        <div class="list-item">
-            <strong>Your Sense of Humor:</strong> Sed do eiusmod tempor incididunt. You always know how to make me laugh.
-        </div>
-        <div class="list-item">
-            <strong>Your Intelligence:</strong> Ut enim ad minim veniam, quis nostrud. I love our deep conversations and your brilliant mind.
-        </div>
-        <div class="list-item">
-            <strong>Everything About You:</strong> Excepteur sint occaecat cupidatat. Simply put, you're perfect for me in every way.
-        </div>
-    </div>
-
-    <!-- Special Memories Section -->
-    <div class="section">
-        <h2>Our Journey Together 🌟</h2>
-        <p><strong>Two years ago today,</strong> our journey began. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Every moment with you has been a treasure.</p>
-        <p><strong>Our adventures together</strong> have been incredible. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. From quiet nights in to exciting adventures out.</p>
-        <p><strong>Looking forward,</strong> I can't wait for all the memories we'll create together. Ut enim ad minim veniam, quis nostrud exercitation. Here's to many more years of love and happiness.</p>
-    </div>
-
-    <!-- Scratch Card Section -->
-    <div class="scratch-section">
-        <h2>One More Thing... 🎁</h2>
-        <p class="scratch-instruction">Scratch below to reveal your special surprise!</p>
-        <div class="scratch-container">
-            <!-- Replace this placeholder with your actual image -->
-            <div class="placeholder-image">
-                <div>Your special image will appear here!<br><br>Replace the placeholder-image div with:<br>&lt;img src="your-image.jpg" class="scratch-image" alt="Special Memory"&gt;</div>
+        <!-- Slide 2: Anniversary -->
+        <div class="slide">
+            <h2>2 Years Together</h2>
+            <div class="timeline">
+                <span>Feb 14, 2024</span>
+                <span>❤️</span>
+                <span>Feb 14, 2026</span>
             </div>
-            <canvas id="scratchCanvas"></canvas>
+            <p>Two incredible years with you</p>
+        </div>
+
+        <!-- Slide 3: Our Story -->
+        <div class="slide">
+            <h2>Our Story</h2>
+            <p>Lorem ipsum dolor sit amet</p>
+            <p>consectetur adipiscing elit</p>
+            <p>Every moment has been magical</p>
+        </div>
+
+        <!-- Slide 4: Things I Love -->
+        <div class="slide">
+            <h2>Why I Love You</h2>
+            <div class="love-item">❤️ Your amazing smile</div>
+            <div class="love-item">❤️ Your kindness</div>
+            <div class="love-item">❤️ Your sense of humor</div>
+            <div class="love-item">❤️ Your intelligence</div>
+            <div class="love-item">❤️ Everything about you</div>
+        </div>
+
+        <!-- Slide 5: Scratch Card -->
+        <div class="slide">
+            <h2>One More Thing...</h2>
+            <p>Scratch to reveal your surprise!</p>
+            <div class="scratch-container">
+                <div class="placeholder-image">
+                    <div>Your special image here!<br><br>Replace with:<br>&lt;img src="your-image.jpg" class="scratch-image" alt="Special Memory"&gt;</div>
+                </div>
+                <canvas id="scratchCanvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Slide 6: Final Message -->
+        <div class="slide">
+            <div class="big-heart">❤️</div>
+            <h1>I Love You</h1>
+            <p>More than words can say</p>
+            <p>Forever yours, Gagan</p>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>I love you more than words can say ❤️</p>
-        <p>Forever yours, Gagan</p>
-    </div>
+    <!-- Navigation Button -->
+    <button class="nav-btn" id="nextBtn">Next ❤️</button>
 
     <script>
-        // Create floating hearts
-        function createHearts() {
-            const container = document.getElementById('heartsContainer');
-            const heartCount = 20;
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const totalSlides = slides.length;
 
-            for (let i = 0; i < heartCount; i++) {
+        // Create animated background particles
+        function createBackgroundAnimation() {
+            const container = document.getElementById('bgAnimation');
+            
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                container.appendChild(particle);
+            }
+
+            // Create floating hearts
+            for (let i = 0; i < 15; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 15 + 's';
-                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDelay = Math.random() * 12 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
                 container.appendChild(heart);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('prev');
+            
+            currentSlide = (currentSlide + 1) % totalSlides;
+            
+            slides[currentSlide].classList.remove('prev');
+            slides[currentSlide].classList.add('active');
+
+            // Update button text
+            if (currentSlide === totalSlides - 1) {
+                nextBtn.textContent = 'Replay ❤️';
+            } else {
+                nextBtn.textContent = 'Next ❤️';
+            }
+
+            // Initialize scratch card when reaching that slide
+            if (currentSlide === 4 && !window.scratchInitialized) {
+                setTimeout(initScratchCard, 300);
+                window.scratchInitialized = true;
             }
         }
 
         // Scratch Card Functionality
         function initScratchCard() {
             const canvas = document.getElementById('scratchCanvas');
+            if (!canvas) return;
+            
             const container = canvas.parentElement;
             
-            // Set canvas size to match container
             function resizeCanvas() {
                 canvas.width = container.offsetWidth;
                 canvas.height = container.offsetHeight;
@@ -385,28 +439,26 @@
             let lastY = 0;
 
             function drawScratchSurface() {
-                // Create gradient background
                 const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, '#ff6b6b');
-                gradient.addColorStop(1, '#ee5a6f');
+                gradient.addColorStop(0, '#ff1744');
+                gradient.addColorStop(1, '#f50057');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Add text
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.font = 'bold 30px Georgia';
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+                ctx.font = 'bold 28px Georgia';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('❤️ Scratch Here ❤️', canvas.width / 2, canvas.height / 2);
                 
-                ctx.font = '20px Georgia';
+                ctx.font = '18px Georgia';
                 ctx.fillText('Use your finger or mouse', canvas.width / 2, canvas.height / 2 + 40);
             }
 
             function scratch(x, y) {
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath();
-                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.arc(x, y, 35, 0, Math.PI * 2);
                 ctx.fill();
             }
 
@@ -457,26 +509,31 @@
                 isDrawing = false;
             }
 
-            // Mouse events
             canvas.addEventListener('mousedown', startDrawing);
             canvas.addEventListener('mousemove', draw);
             canvas.addEventListener('mouseup', stopDrawing);
             canvas.addEventListener('mouseleave', stopDrawing);
-
-            // Touch events
             canvas.addEventListener('touchstart', startDrawing);
             canvas.addEventListener('touchmove', draw);
             canvas.addEventListener('touchend', stopDrawing);
 
-            // Initialize
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
         }
 
-        // Initialize everything when page loads
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            }
+        });
+
+        // Initialize
         window.addEventListener('DOMContentLoaded', () => {
-            createHearts();
-            initScratchCard();
+            createBackgroundAnimation();
         });
     </script>
 </body>
