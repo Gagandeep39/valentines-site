@@ -1,0 +1,426 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Simple stars background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+/* Slide Container */
+.slides-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slide h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin: 1rem 0;
+    letter-spacing: 0.05em;
+}
+
+.slide h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: #ffb3ba;
+}
+
+/* Elegant animations for first slide */
+.fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.fade-in-up-delay-1 {
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-out 0.4s forwards;
+}
+
+.fade-in-up-delay-2 {
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-out 0.8s forwards;
+}
+
+.fade-in-up-delay-3 {
+    opacity: 0;
+    animation: fadeInUp 1.2s ease-out 1.2s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.special-name {
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: #ffb3ba;
+}
+
+.slide p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.8;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+.heart {
+    font-size: 4rem;
+    margin: 1.5rem 0;
+}
+
+.timeline {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.3rem;
+    margin: 2rem 0;
+    opacity: 0.8;
+}
+
+.days-number {
+    font-size: 8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.days-text {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #ffb3ba;
+    margin: 1rem 0 2rem 0;
+}
+
+.days-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0.8;
+    max-width: 600px;
+    color: #ff6b7a;
+}
+
+/* Elegant Timeline - Mobile First */
+.timeline-container {
+    width: 100%;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.timeline-container::before,
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.timeline-container::before {
+    left: 0;
+    background: linear-gradient(to right, #090a0f, transparent);
+}
+
+.timeline-container::after {
+    right: 0;
+    background: linear-gradient(to left, #090a0f, transparent);
+}
+
+.timeline-scroll {
+    display: flex;
+    gap: 1.2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1.5rem;
+    padding-left: calc(50% - 140px);
+    padding-right: calc(50% - 140px);
+    margin: 0 auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+.timeline-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-card {
+    flex: 0 0 280px;
+    height: 360px;
+    scroll-snap-align: center;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 179, 186, 0.08), rgba(138, 43, 226, 0.08));
+    border: 1px solid rgba(255, 179, 186, 0.25);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(255, 179, 186, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.timeline-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(255, 179, 186, 0.35);
+    border-color: rgba(255, 179, 186, 0.5);
+}
+
+.timeline-card-image {
+    width: 100%;
+    height: 260px;
+    background: linear-gradient(135deg, rgba(255, 179, 186, 0.2), rgba(138, 43, 226, 0.15));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-card-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 100%;
+    }
+}
+
+.timeline-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-card-content {
+    padding: 1.2rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.timeline-card-date {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffb3ba;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.timeline-card-caption {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    font-weight: 300;
+}
+
+.scroll-indicator {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.5;
+    margin-top: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.love-list {
+    margin-top: 2rem;
+}
+
+.love-item {
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+    font-weight: 300;
+    opacity: 0.85;
+}
+
+/* Navigation */
+.nav-btn {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Scratch Card */
+.scratch-container {
+    position: relative;
+    width: 500px;
+    max-width: 90%;
+    margin: 2rem auto;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 350px;
+    background: rgba(255, 179, 186, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+#scratchCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
+
+@media (max-width: 768px) {
+    .slide h1 { font-size: 2.5rem; }
+    .slide h2 { font-size: 1.8rem; }
+    .heart { font-size: 3rem; }
+    .timeline { font-size: 1rem; gap: 1rem; }
+    .nav-btn { bottom: 1.5rem; right: 1.5rem; }
+    .days-number { font-size: 5rem; }
+    .days-text { font-size: 2rem; }
+    
+    .timeline-card {
+        flex: 0 0 260px;
+        height: 340px;
+    }
+    
+    .timeline-card-image {
+        height: 240px;
+        font-size: 3.5rem;
+    }
+    
+    .timeline-scroll {
+        padding: 1rem;
+        padding-left: calc(50% - 130px);
+        padding-right: calc(50% - 130px);
+        gap: 1rem;
+    }
+    
+    .timeline-container::before,
+    .timeline-container::after {
+        width: 40px;
+    }
+    
+    .scroll-indicator {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-card {
+        flex: 0 0 240px;
+        height: 320px;
+    }
+    
+    .timeline-card-image {
+        height: 220px;
+        font-size: 3rem;
+    }
+    
+    .timeline-card-content {
+        padding: 1rem;
+    }
+    
+    .timeline-scroll {
+        padding: 1rem;
+        padding-left: calc(50% - 120px);
+        padding-right: calc(50% - 120px);
+    }
+    
+    .timeline-container::before,
+    .timeline-container::after {
+        width: 30px;
+    }
+}
