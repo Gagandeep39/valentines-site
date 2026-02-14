@@ -357,27 +357,13 @@ body {
 .timeline-container {
     width: 100%;
     position: relative;
+    mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
 }
 
 .timeline-container::before,
 .timeline-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 60px;
-    height: 100%;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.timeline-container::before {
-    left: 0;
-    background: linear-gradient(to right, #090a0f, transparent);
-}
-
-.timeline-container::after {
-    right: 0;
-    background: linear-gradient(to left, #090a0f, transparent);
+    display: none;
 }
 
 .timeline-scroll {
