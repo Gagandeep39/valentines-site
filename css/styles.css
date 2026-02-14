@@ -518,23 +518,28 @@ body {
     position: fixed;
     bottom: 2.5rem;
     right: 2.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    border-radius: 25px;
+    background: transparent;
+    backdrop-filter: none;
+    color: #ff69b4;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 0;
     cursor: pointer;
     z-index: 10;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 300;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    opacity: 0.65;
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: translateX(4px);
 }
 
 /* Scratch Card */
