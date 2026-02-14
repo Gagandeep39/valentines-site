@@ -26,7 +26,7 @@ function initScratchCard() {
  * Draw the initial scratch card surface
  */
 function drawScratchSurface(ctx, canvas) {
-    ctx.fillStyle = 'rgba(255, 179, 186, 0.9)';
+    ctx.fillStyle = 'rgba(255, 179, 186, 1)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'white';
     ctx.font = '20px sans-serif';
@@ -99,7 +99,8 @@ function checkScratchProgress(ctx, canvas) {
             hasRevealed = true;
             clearInterval(checkInterval);
             
-            // Hide canvas and show message
+            // Disable canvas interaction and show message
+            canvas.style.pointerEvents = 'none';
             const message = document.getElementById('scratchMessage');
             message.style.visibility = 'visible';
         }

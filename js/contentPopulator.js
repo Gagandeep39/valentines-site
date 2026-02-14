@@ -49,7 +49,7 @@ function populateTimeline() {
     const placeholderCard = `
         <div class="timeline-card placeholder-card">
             <div class="placeholder-card-content">
-                <p class="placeholder-text">Noticed something… it’s only you in these pics. Clearly, we need more photos together so I can keep making cheesy stuff like this!</p>
+                <p class="placeholder-text">Noticed something… it’s only you in these pics.</br>Clearly, we need more photos together so I can keep making cheesy stuff like this! 😛</p>
             </div>
         </div>
     `;
