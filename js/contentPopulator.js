@@ -89,14 +89,14 @@ function animateDaysNumbers() {
         const currentHours = Math.floor(data.hours * easeOut);
         const currentHeartbeats = Math.floor(data.heartbeats * easeOut);
         
-        subtitleElement.textContent = 
-            `That's roughly ${formatNumber(currentHours)} hours. Or around ${formatNumber(currentHeartbeats)} heartbeats.`;
+        subtitleElement.innerHTML = 
+            `That's roughly ${formatNumber(currentHours)} hours. <br/>Or around ${formatNumber(currentHeartbeats)} heartbeats.`;
         
         if (progress < 1) {
             requestAnimationFrame(updateSubtitle);
         } else {
-            subtitleElement.textContent = 
-                `That's roughly ${formatNumber(data.hours)} hours. Or around ${formatNumber(data.heartbeats)} heartbeats.`;
+            subtitleElement.innerHTML = 
+                `That's roughly ${formatNumber(data.hours)} hours. <br/>Or around ${formatNumber(data.heartbeats)} heartbeats.`;
         }
     }
     requestAnimationFrame(updateSubtitle);
